@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COSMO AI - Your gateway to intelligent solutions. Explore the future of AI with cutting-edge technology and seamless integrations.">
+    <meta name="keywords" content="AI, COSMO AI, Artificial Intelligence, Technology, Innovation">
     <title>COSMO AI</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Raleway:wght@300;500&display=swap');
@@ -16,6 +18,7 @@
         }
 
         header {
+            
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -25,6 +28,7 @@
             position: fixed;
             width: 100%;
             z-index: 100;
+            margin-left: -150px;
         }
 
         .logo {
@@ -68,7 +72,15 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+        }
+
         @media (max-width: 768px) {
+            
             nav ul {
                 display: none;
                 flex-direction: column;
@@ -86,9 +98,6 @@
 
             .menu-toggle {
                 display: block;
-                font-size: 2rem;
-                cursor: pointer;
-                color: white;
             }
         }
 
@@ -219,17 +228,44 @@
             height: 100%;
             z-index: 0;
         }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        form input, form textarea, form button {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">COSMO AI</div>
         <nav>
+            <div class="menu-toggle">☰</div>
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#Contract">Contract</a></li>
                 <li><a href="#cosmobot">Cosmobot</a></li>
-                <li><a href="#contrat"></a></li>
+                <li><a href="#feedback">Feedback</a></li>
             </ul>
         </nav>
     </header>
@@ -241,21 +277,30 @@
             <h1>Welcome to COSMO AI</h1>
             <p>Your gateway to intelligent solutions. Explore the future of AI with cutting-edge technology and seamless integrations.</p>
             <div class="cta-buttons">
-                <a href="https://x.com/Cosmo__AI" target="_blank">Visit X</a>
-                <a href="https://dexscreener.com/solana">Connect to DexScrenner</a>
+                <a href="https://x.com/Cosmo__AI" target="_blank">Visit X 🚀</a>
+                <a href="https://dexscreener.com/solana">Connect to DexScrenner 🔗</a>
             </div>
         </div>
     </div>
 
     <section id="Contract">
         <h2>Contract</h2>
-        <p>Not launched yet,
-            We continue to improve our AI agent.</p>
+        <p>Not launched yet. We continue to improve our AI agent.</p>
     </section>
 
     <section id="cosmobot">
         <h2>Cosmobot</h2>
-        <p>coming soon...</p>
+        <p>Coming soon...</p>
+    </section>
+
+    <section id="feedback">
+        <h2>Feedback</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
     </section>
 
     <footer>
@@ -277,11 +322,14 @@
 
         camera.position.z = 30;
 
+        let clock = new THREE.Clock();
+
         function animate() {
-            requestAnimationFrame(animate);
-            torus.rotation.x += 0.01;
-            torus.rotation.y += 0.01;
+            const delta = clock.getDelta();
+            torus.rotation.x += delta * 0.5;
+            torus.rotation.y += delta * 0.5;
             renderer.render(scene, camera);
+            requestAnimationFrame(animate);
         }
 
         animate();
@@ -291,7 +339,17 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('nav ul');
+
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        });
     </script>
 </body>
 </html>
+
 

@@ -18,6 +18,7 @@
         }
 
         header {
+            
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -79,6 +80,7 @@
         }
 
         @media (max-width: 768px) {
+            
             nav ul {
                 display: none;
                 flex-direction: column;
@@ -243,68 +245,14 @@
         }
 
         form button {
-            background-color: #420548;
+            background-color: #4CAF50;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         form button:hover {
-            background-color: #3c0840;
-        }
-
-        #chat-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        #chat-log {
-            width: 90%;
-            max-width: 600px;
-            height: 300px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            overflow-y: auto;
-            padding: 10px;
-            border: 1px solid white;
-            border-radius: 10px;
-        }
-
-        #chat-log p {
-            margin: 5px 0;
-        }
-
-        #chat-input {
-            width: 90%;
-            max-width: 600px;
-            display: flex;
-            gap: 10px;
-        }
-
-        #chat-input input {
-            flex-grow: 1;
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid white;
-        }
-
-        #chat-input button {
-            padding: 10px 20px;
-            background-color: #200432;
-            color: white;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #chat-input button:hover {
-            background-color: #3d0543;
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -342,13 +290,7 @@
 
     <section id="cosmobot">
         <h2>Cosmobot</h2>
-        <div id="chat-container">
-            <div id="chat-log"></div>
-            <div id="chat-input">
-                <input type="text" id="user-input" placeholder="Type your message...">
-                <button id="send-button">Send</button>
-            </div>
-        </div>
+        <p>Coming soon...</p>
     </section>
 
     <section id="feedback">
@@ -404,45 +346,6 @@
 
             menuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
-            });
-
-            const chatLog = document.getElementById('chat-log');
-            const userInput = document.getElementById('user-input');
-            const sendButton = document.getElementById('send-button');
-
-            async function sendMessage(message) {
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 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 ' 
-                    },
-                    body: JSON.stringify({
-                        model: 'gpt-4',
-                        messages: [{ role: 'user', content: message }]
-                    })
-                });
-
-                const data = await response.json();
-                return data.choices[0].message.content;
-            }
-
-            sendButton.addEventListener('click', async () => {
-                const message = userInput.value.trim();
-                if (message) {
-                    const userMessage = document.createElement('p');
-                    userMessage.textContent = `You: ${message}`;
-                    chatLog.appendChild(userMessage);
-
-                    const botReply = await sendMessage(message);
-
-                    const botMessage = document.createElement('p');
-                    botMessage.textContent = `Cosmobot: ${botReply}`;
-                    chatLog.appendChild(botMessage);
-
-                    userInput.value = '';
-                    chatLog.scrollTop = chatLog.scrollHeight;
-                }
             });
         });
     </script>
